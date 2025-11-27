@@ -1,0 +1,76 @@
+// src/styles/ant-theme.less
+
+/**
+ * Ant Design v4 Theme Variables
+ *
+ * This file contains theme variables for projects using Ant Design v4.
+ * These variables are used in the `modifyVars` option of your build tool
+ * (e.g., craco, webpack) to customize the default Ant Design theme.
+ *
+ * How to use (with craco):
+ * 1. Install `@craco/craco` and `craco-less`.
+ * 2. Create a `craco.config.js` file in your project root.
+ * 3. Add the following configuration:
+ *
+ * const CracoLessPlugin = require('craco-less');
+ *
+ * module.exports = {
+ *   plugins: [
+ *     {
+ *       plugin: CracoLessPlugin,
+ *       options: {
+ *         lessLoaderOptions: {
+ *           lessOptions: {
+ *             modifyVars: {
+ *               '@primary-color': '#3DD5C9',
+ *               // Add other variables from this file here
+ *             },
+ *             javascriptEnabled: true,
+ *           },
+ *         },
+ *       },
+ *     },
+ *   ],
+ * };
+ */
+
+// Color Palette
+@primary-color: #3DD5C9;
+@primary-7: #0A3D3B;
+@accent-color: #A9E4EB;
+@text-color: #252A2E;
+@text-color-secondary: #5A636A;
+@body-background: #F5F9F8;
+@component-background: #FFFFFF;
+@border-color-base: #D9E4E2;
+
+// Semantic Colors
+@success-color: #43C87B;
+@warning-color: #F5A623;
+@error-color: #E85151;
+@info-color: @primary-color;
+
+// Typography
+@font-family: 'Inter var', Inter, "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+@font-size-base: 16px;
+
+// Borders and Shadows
+@border-radius-base: 12px;
+@box-shadow-base: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+// Glassmorphism
+@glass-blur: 10px;
+@glass-bg-light: rgba(255, 255, 255, 0.1);
+@glass-bg-dark: rgba(10, 61, 59, 0.12);
+@glass-border-light: 1px solid rgba(255, 255, 255, 0.1);
+@glass-border-dark: 1px solid rgba(10, 61, 59, 0.1);
+@glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+
+// Component Overrides
+@card-radius: 16px;
+@card-shadow: @box-shadow-base;
+@badge-height: 22px;
+
+// Dark Mode (example variables)
+@dark-bg: #051414;
+@dark-text: #E6F7F5;

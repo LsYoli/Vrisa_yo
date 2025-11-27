@@ -1,0 +1,138 @@
+/* src/styles/global.css */
+
+/**
+ * Global Styles and CSS Variables
+ *
+ * This file defines global styles, CSS variables (`:root`), and utility classes
+ * for use across the application, especially for non-AntD components or for
+ * applying consistent styling outside of the AntD ecosystem.
+ *
+ * How to use:
+ * 1. Import this file in your main entry point (e.g., `main.jsx` or `App.jsx`).
+ *    `import './styles/global.css';`
+ * 2. Use the CSS variables in your components' stylesheets.
+ *    `background-color: var(--color-primary);`
+ * 3. Apply utility classes directly in your JSX.
+ *    `<div className="card--glass">...</div>`
+ */
+
+:root {
+  /* Color Palette */
+  --color-primary: #3DD5C9;
+  --color-primary-700: #0A3D3B;
+  --color-bg: #F5F9F8;
+  --color-accent: #A9E4EB;
+  --color-text: #252A2E;
+  --color-muted: #D9E4E2;
+
+  /* Semantic Colors */
+  --color-good: #43C87B;
+  --color-warn: #F5A623;
+  --color-danger: #E85151;
+
+  /* Typography */
+  --font-family-sans: 'Inter var', Inter, "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-base: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --fs-3xl: 32px;
+
+  /* Glassmorphism */
+  --glass-blur: 10px;
+  --glass-bg-light: rgba(255, 255, 255, 0.1);
+  --glass-border-light: 1px solid rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  --glass-border-radius: 16px;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #051414;
+    --color-text: #E6F7F5;
+    --color-muted: #1a3d3b;
+    --glass-bg-light: rgba(10, 61, 59, 0.12);
+    --glass-border-light: 1px solid rgba(10, 61, 59, 0.1);
+  }
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Utility Classes */
+
+.app-header--glass,
+.card--glass {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-light);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--glass-border-radius);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.metric__value {
+  font-size: var(--fs-3xl);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.metric__label {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+/* Badge Overrides */
+.badge--ok .ant-badge-status-dot {
+  background-color: var(--color-good) !important;
+}
+.badge--warn .ant-badge-status-dot {
+  background-color: var(--color-warn) !important;
+}
+.badge--danger .ant-badge-status-dot {
+  background-color: var(--color-danger) !important;
+}
+
+/* Wrappers */
+.map-wrapper,
+.chart-wrapper {
+  width: 100%;
+  height: 400px;
+  background-color: #fff;
+  border-radius: var(--glass-border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .map-wrapper,
+  .chart-wrapper {
+    background-color: var(--color-primary-700);
+    border: 1px solid var(--color-muted);
+  }
+}
+
+/* Accessibility: Focus States */
+a:focus-visible,
+button:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(169, 228, 235, 0.5);
+  border-radius: 4px;
+}
