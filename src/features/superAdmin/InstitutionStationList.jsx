@@ -22,17 +22,21 @@ export const InstitutionStationList = () => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Estación ID</th>
+              <th>Institución ID</th>
               <th>Institución</th>
               <th>Estación</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.id_relacion}>
-                <td>{row.id_relacion}</td>
-                <td>{row.institucion?.nombre || 'N/D'}</td>
-                <td>{row.estacion?.nombre || 'N/D'}</td>
+              <tr
+                key={`${row.estacion_estacion_id || 'est'}-${row.institucion_institucion_id || 'inst'}`}
+              >
+                <td>{row.estacion_estacion_id}</td>
+                <td>{row.institucion_institucion_id}</td>
+                <td>{row.institucion?.nombre_institucion || 'N/D'}</td>
+                <td>{row.estacion?.nombre_estacion || 'N/D'}</td>
               </tr>
             ))}
           </tbody>

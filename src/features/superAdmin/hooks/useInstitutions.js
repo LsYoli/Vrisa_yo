@@ -11,8 +11,8 @@ export const useInstitutions = () => {
     setError(null);
     const { data, error: fetchError } = await supabase
       .from('institucion')
-      .select('id_institucion, nombre, descripcion, estado')
-      .order('id_institucion', { ascending: true });
+      .select('institucion_id, nombre_institucion, logo, direccion')
+      .order('institucion_id', { ascending: true });
 
     if (fetchError) {
       setError(fetchError.message);
@@ -22,24 +22,11 @@ export const useInstitutions = () => {
     setLoading(false);
   }, []);
 
-  const approveInstitution = async (id) => {
-    setLoading(true);
-    const { error: updateError } = await supabase
-      .from('institucion')
-      .update({ estado: 'aprobada' })
-      .eq('id_institucion', id);
-    if (updateError) {
-      setError(updateError.message);
-    }
-    await fetchInstitutions();
-    setLoading(false);
-  };
-
   const deleteInstitution = async (id) => {
     const shouldDelete = window.confirm('¿Eliminar definitivamente la institución?');
     if (!shouldDelete) return;
     setLoading(true);
-    const { error: deleteError } = await supabase.from('institucion').delete().eq('id_institucion', id);
+    const { error: deleteError } = await supabase.from('institucion').delete().eq('institucion_id', id);
     if (deleteError) {
       setError(deleteError.message);
     }
@@ -62,7 +49,7 @@ export const useInstitutions = () => {
     const { error: updateError } = await supabase
       .from('institucion')
       .update(payload)
-      .eq('id_institucion', id);
+      .eq('institucion_id', id);
     if (updateError) setError(updateError.message);
     await fetchInstitutions();
     setLoading(false);
@@ -76,7 +63,6 @@ export const useInstitutions = () => {
     institutions,
     loading,
     error,
-    approveInstitution,
     deleteInstitution,
     createInstitution,
     updateInstitution,

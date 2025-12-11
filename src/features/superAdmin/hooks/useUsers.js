@@ -14,7 +14,10 @@ export const useUsers = () => {
     setError(null);
 
     const [userRes, roleRes, permissionRes, rolePermRes] = await Promise.all([
-      supabase.from('usuario').select('id_usuario, email, rol').order('id_usuario', { ascending: true }),
+      supabase
+        .from('usuario')
+        .select('usuario_id, nombre_usuario, telefono, email, rol_id, institucion_id')
+        .order('usuario_id', { ascending: true }),
       supabase.from('rol').select('*').order('id_rol', { ascending: true }),
       supabase.from('permiso').select('*').order('id_permiso', { ascending: true }),
       supabase.from('permiso_por_rol').select('*'),
@@ -39,7 +42,7 @@ export const useUsers = () => {
 
   const updateUserRole = async (userId, roleValue) => {
     setLoading(true);
-    const { error: updateError } = await supabase.from('usuario').update({ rol: roleValue }).eq('id_usuario', userId);
+    const { error: updateError } = await supabase.from('usuario').update({ rol_id: roleValue }).eq('usuario_id', userId);
     if (updateError) {
       setError(updateError.message);
     }

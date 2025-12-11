@@ -42,22 +42,26 @@ export const UserManager = () => {
           <thead>
             <tr>
               <th>ID</th>
+              <th>Usuario</th>
               <th>Email</th>
+              <th>Teléfono</th>
               <th>Rol</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id_usuario}>
-                <td>{user.id_usuario}</td>
-                <td>{user.email || user.nombre}</td>
+              <tr key={user.usuario_id}>
+                <td>{user.usuario_id}</td>
+                <td>{user.nombre_usuario || '—'}</td>
+                <td>{user.email || '—'}</td>
+                <td>{user.telefono || '—'}</td>
                 <td>
                   <div className={styles.inlineForm}>
                     <select
                       className={styles.input}
-                      value={user.rol ?? ''}
-                      onChange={(e) => updateUserRole(user.id_usuario, parseRoleValue(e.target.value))}
+                      value={user.rol_id ?? ''}
+                      onChange={(e) => updateUserRole(user.usuario_id, parseRoleValue(e.target.value))}
                     >
                       <option value="">Sin rol</option>
                       {roles.map((role) => {
@@ -74,7 +78,7 @@ export const UserManager = () => {
                 <td>
                   <button
                     className={styles.buttonSecondary + ' ' + styles.button}
-                    onClick={() => setSelectedRole(parseRoleValue(user.rol))}
+                    onClick={() => setSelectedRole(parseRoleValue(user.rol_id))}
                   >
                     Ver permisos del rol
                   </button>

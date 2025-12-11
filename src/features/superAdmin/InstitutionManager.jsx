@@ -3,20 +3,19 @@ import styles from './SuperAdminDashboard.module.css';
 import { useInstitutions } from './hooks/useInstitutions';
 
 const initialForm = {
-  nombre: '',
-  descripcion: '',
-  estado: 'pendiente',
+  nombre_institucion: '',
+  logo: '',
+  direccion: '',
 };
 
 export const InstitutionManager = () => {
-  const { institutions, loading, error, approveInstitution, deleteInstitution, createInstitution, updateInstitution } =
-    useInstitutions();
+  const { institutions, loading, error, deleteInstitution, createInstitution, updateInstitution } = useInstitutions();
   const [form, setForm] = useState(initialForm);
   const [editingId, setEditingId] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!form.nombre) return;
+    if (!form.nombre_institucion) return;
     if (editingId) {
       await updateInstitution(editingId, form);
     } else {
@@ -28,11 +27,11 @@ export const InstitutionManager = () => {
 
   const handleEdit = (institution) => {
     setForm({
-      nombre: institution.nombre || '',
-      descripcion: institution.descripcion || '',
-      estado: institution.estado || 'pendiente',
+      nombre_institucion: institution.nombre_institucion || '',
+      logo: institution.logo || '',
+      direccion: institution.direccion || '',
     });
-    setEditingId(institution.id_institucion);
+    setEditingId(institution.institucion_id);
   };
 
   return (
@@ -50,19 +49,23 @@ export const InstitutionManager = () => {
           Nombre
           <input
             className={styles.input}
-            value={form.nombre}
-            onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+            value={form.nombre_institucion}
+            onChange={(e) => setForm({ ...form, nombre_institucion: e.target.value })}
             placeholder="Nombre de la institución"
             required
           />
         </label>
         <label className={styles.label}>
-          Descripción
+          Logo (URL)
+          <input className={styles.input} value={form.logo} onChange={(e) => setForm({ ...form, logo: e.target.value })} />
+        </label>
+        <label className={styles.label}>
+          Dirección
           <input
             className={styles.input}
-            value={form.descripcion}
-            onChange={(e) => setForm({ ...form, descripcion: e.target.value })}
-            placeholder="Descripción"
+            value={form.direccion}
+            onChange={(e) => setForm({ ...form, direccion: e.target.value })}
+            placeholder="Dirección"
           />
         </label>
         <div className={styles.actions}>
@@ -93,34 +96,25 @@ export const InstitutionManager = () => {
             <tr>
               <th>ID</th>
               <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Estado</th>
+              <th>Logo</th>
+              <th>Dirección</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {institutions.map((inst) => (
-              <tr key={inst.id_institucion}>
-                <td>{inst.id_institucion}</td>
-                <td>{inst.nombre}</td>
-                <td>{inst.descripcion}</td>
-                <td>
-                  <span className={`${styles.tag} ${inst.estado === 'aprobada' ? styles.statusApproved : styles.statusPending}`}>
-                    {inst.estado === 'aprobada' ? 'Aprobada' : inst.estado || 'Pendiente'}
-                  </span>
-                </td>
+              <tr key={inst.institucion_id}>
+                <td>{inst.institucion_id}</td>
+                <td>{inst.nombre_institucion}</td>
+                <td>{inst.logo || '—'}</td>
+                <td>{inst.direccion || '—'}</td>
                 <td className={styles.actions}>
-                  {inst.estado !== 'aprobada' && (
-                    <button className={styles.button} onClick={() => approveInstitution(inst.id_institucion)}>
-                      Aprobar
-                    </button>
-                  )}
                   <button className={styles.buttonSecondary + ' ' + styles.button} onClick={() => handleEdit(inst)}>
                     Editar
                   </button>
                   <button
                     className={styles.buttonDanger + ' ' + styles.button}
-                    onClick={() => deleteInstitution(inst.id_institucion)}
+                    onClick={() => deleteInstitution(inst.institucion_id)}
                   >
                     Eliminar
                   </button>

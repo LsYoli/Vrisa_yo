@@ -4,10 +4,8 @@ import { useVariables } from './hooks/useVariables';
 
 const initialForm = {
   nombre: '',
-  descripcion: '',
   unidad: '',
-  valor_referencia: '',
-  activa: true,
+  descripcion: '',
 };
 
 export const VariableManager = () => {
@@ -36,12 +34,10 @@ export const VariableManager = () => {
   const handleEdit = (variable) => {
     setForm({
       nombre: variable.nombre || '',
-      descripcion: variable.descripcion || '',
       unidad: variable.unidad || '',
-      valor_referencia: variable.valor_referencia || '',
-      activa: variable.activa ?? true,
+      descripcion: variable.descripcion || '',
     });
-    setEditingId(variable.id_variable);
+    setEditingId(variable.variable_id);
   };
 
   return (
@@ -74,37 +70,15 @@ export const VariableManager = () => {
             placeholder="Breve descripción"
           />
         </label>
-        <div className={styles.inlineForm}>
-          <label className={styles.label}>
-            Unidad
-            <input
-              className={styles.input}
-              value={form.unidad}
-              onChange={(e) => setForm({ ...form, unidad: e.target.value })}
-              placeholder="Ej. °C, m/s"
-            />
-          </label>
-          <label className={styles.label}>
-            Valor referencia
-            <input
-              className={styles.input}
-              value={form.valor_referencia}
-              onChange={(e) => setForm({ ...form, valor_referencia: e.target.value })}
-              placeholder="Ej. 100"
-            />
-          </label>
-          <label className={styles.label}>
-            Activa
-            <select
-              className={styles.input}
-              value={form.activa ? 'true' : 'false'}
-              onChange={(e) => setForm({ ...form, activa: e.target.value === 'true' })}
-            >
-              <option value="true">Sí</option>
-              <option value="false">No</option>
-            </select>
-          </label>
-        </div>
+        <label className={styles.label}>
+          Unidad
+          <input
+            className={styles.input}
+            value={form.unidad}
+            onChange={(e) => setForm({ ...form, unidad: e.target.value })}
+            placeholder="Ej. °C, m/s"
+          />
+        </label>
         <div className={styles.actions}>
           <button className={styles.button} type="submit">
             {editingId ? 'Actualizar variable' : 'Crear variable'}
@@ -135,31 +109,23 @@ export const VariableManager = () => {
               <th>Nombre</th>
               <th>Descripción</th>
               <th>Unidad</th>
-              <th>Valor ref.</th>
-              <th>Activa</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {sortedVariables.map((variable) => (
-              <tr key={variable.id_variable}>
-                <td>{variable.id_variable}</td>
+              <tr key={variable.variable_id}>
+                <td>{variable.variable_id}</td>
                 <td>{variable.nombre}</td>
                 <td>{variable.descripcion}</td>
                 <td>{variable.unidad}</td>
-                <td>{variable.valor_referencia}</td>
-                <td>
-                  <span className={`${styles.tag} ${variable.activa ? styles.statusApproved : styles.statusPending}`}>
-                    {variable.activa ? 'Activa' : 'Inactiva'}
-                  </span>
-                </td>
                 <td className={styles.actions}>
                   <button className={styles.buttonSecondary + ' ' + styles.button} onClick={() => handleEdit(variable)}>
                     Editar
                   </button>
                   <button
                     className={styles.buttonDanger + ' ' + styles.button}
-                    onClick={() => deleteVariable(variable.id_variable)}
+                    onClick={() => deleteVariable(variable.variable_id)}
                   >
                     Eliminar
                   </button>

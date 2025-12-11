@@ -12,9 +12,10 @@ export const useInstitutionStations = () => {
     const { data, error: fetchError } = await supabase
       .from('estacion_has_institucion')
       .select(
-        'id_relacion, institucion:institucion_id(id_institucion, nombre), estacion:estacion_id(id_estacion, nombre)'
+        'estacion_estacion_id, institucion_institucion_id, estacion:estacion_estacion_id(estacion_id, nombre_estacion), institucion:institucion_institucion_id(institucion_id, nombre_institucion)'
       )
-      .order('id_relacion', { ascending: true });
+      .order('estacion_estacion_id', { ascending: true })
+      .order('institucion_institucion_id', { ascending: true });
 
     if (fetchError) {
       setError(fetchError.message);

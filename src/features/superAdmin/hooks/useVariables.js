@@ -11,8 +11,8 @@ export const useVariables = () => {
     setError(null);
     const { data, error: fetchError } = await supabase
       .from('variable')
-      .select('id_variable, nombre, descripcion, unidad, valor_referencia, activa')
-      .order('id_variable', { ascending: true });
+      .select('variable_id, nombre, unidad, descripcion')
+      .order('variable_id', { ascending: true });
 
     if (fetchError) {
       setError(fetchError.message);
@@ -34,7 +34,7 @@ export const useVariables = () => {
 
   const updateVariable = async (id, payload) => {
     setLoading(true);
-    const { error: updateError } = await supabase.from('variable').update(payload).eq('id_variable', id);
+    const { error: updateError } = await supabase.from('variable').update(payload).eq('variable_id', id);
     if (updateError) {
       setError(updateError.message);
     }
@@ -46,7 +46,7 @@ export const useVariables = () => {
     const shouldDelete = window.confirm('¿Estás seguro de eliminar esta variable?');
     if (!shouldDelete) return;
     setLoading(true);
-    const { error: deleteError } = await supabase.from('variable').delete().eq('id_variable', id);
+    const { error: deleteError } = await supabase.from('variable').delete().eq('variable_id', id);
     if (deleteError) {
       setError(deleteError.message);
     }

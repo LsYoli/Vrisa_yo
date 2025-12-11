@@ -11,8 +11,10 @@ export const useStations = () => {
     setError(null);
     const { data, error: fetchError } = await supabase
       .from('estacion')
-      .select('id_estacion, nombre, descripcion, estado')
-      .order('id_estacion', { ascending: true });
+      .select(
+        'estacion_id, nombre_estacion, latitud, longitud, ubicacion, frecuencia_actualizacion, estado, tecnico_id, admin_id, reporte_id',
+      )
+      .order('estacion_id', { ascending: true });
     if (fetchError) {
       setError(fetchError.message);
     } else if (data) {
@@ -21,24 +23,11 @@ export const useStations = () => {
     setLoading(false);
   }, []);
 
-  const approveStation = async (id) => {
-    setLoading(true);
-    const { error: updateError } = await supabase
-      .from('estacion')
-      .update({ estado: 'aprobada' })
-      .eq('id_estacion', id);
-    if (updateError) {
-      setError(updateError.message);
-    }
-    await fetchStations();
-    setLoading(false);
-  };
-
   const deleteStation = async (id) => {
     const shouldDelete = window.confirm('¿Eliminar definitivamente la estación?');
     if (!shouldDelete) return;
     setLoading(true);
-    const { error: deleteError } = await supabase.from('estacion').delete().eq('id_estacion', id);
+    const { error: deleteError } = await supabase.from('estacion').delete().eq('estacion_id', id);
     if (deleteError) {
       setError(deleteError.message);
     }
@@ -61,7 +50,7 @@ export const useStations = () => {
     const { error: updateError } = await supabase
       .from('estacion')
       .update(payload)
-      .eq('id_estacion', id);
+      .eq('estacion_id', id);
     if (updateError) setError(updateError.message);
     await fetchStations();
     setLoading(false);
@@ -75,7 +64,6 @@ export const useStations = () => {
     stations,
     loading,
     error,
-    approveStation,
     deleteStation,
     createStation,
     updateStation,
