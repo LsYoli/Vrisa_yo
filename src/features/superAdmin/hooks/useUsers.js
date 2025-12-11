@@ -18,8 +18,8 @@ export const useUsers = () => {
         .from('usuario')
         .select('usuario_id, nombre_usuario, telefono, email, rol_id, institucion_id')
         .order('usuario_id', { ascending: true }),
-      supabase.from('rol').select('*').order('id_rol', { ascending: true }),
-      supabase.from('permiso').select('*').order('id_permiso', { ascending: true }),
+      supabase.from('rol').select('rol_id, nombre').order('rol_id', { ascending: true }),
+      supabase.from('permiso').select('permiso_id, nombre').order('permiso_id', { ascending: true }),
       supabase.from('permiso_por_rol').select('*'),
     ]);
 

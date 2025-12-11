@@ -7,8 +7,8 @@ export const UserManager = () => {
     useUsers();
   const [selectedRole, setSelectedRole] = useState(null);
 
-  const getRoleId = (role) => role?.id_rol ?? role?.id;
-  const getPermissionId = (perm) => perm?.id_permiso ?? perm?.id;
+  const getRoleId = (role) => role?.rol_id ?? role?.id;
+  const getPermissionId = (perm) => perm?.permiso_id ?? perm?.id;
   const parseRoleValue = (value) => {
     if (value === '' || value === null || value === undefined) return null;
     const numeric = Number(value);

@@ -1,10 +1,14 @@
 :root {
-  --green: #88e788;
-  --light-blue: #add8e6;
+  --primary: #0e8791;
+  --primary-hover: #0b6e75;
+  --dark: #003049;
+  --success: #2ecc71;
+  --warning: #f1c40f;
+  --danger: #c0392b;
   --white: #ffffff;
-  --text: #0f172a;
+  --surface: #f5f5f5;
   --muted: #4a5568;
-  --border: #e2e8f0;
+  --border: #e8eef2;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -12,12 +16,12 @@
   display: grid;
   grid-template-columns: 260px 1fr;
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(136, 231, 136, 0.08), rgba(173, 216, 230, 0.18));
+  background: linear-gradient(135deg, rgba(14, 135, 145, 0.08), rgba(232, 238, 242, 0.5));
 }
 
 .content {
   padding: 24px;
-  background-color: #f9fafb;
+  background-color: var(--surface);
 }
 
 .header {
@@ -30,7 +34,7 @@
 .title {
   font-size: 28px;
   font-weight: 800;
-  color: var(--text);
+  color: var(--dark);
   letter-spacing: -0.02em;
 }
 
@@ -64,14 +68,14 @@
 .cardTitle {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--dark);
 }
 
 .badge {
   padding: 6px 12px;
   border-radius: 999px;
-  background: var(--light-blue);
-  color: #0b335c;
+  background: var(--primary);
+  color: var(--white);
   font-weight: 700;
   font-size: 12px;
 }
@@ -83,8 +87,8 @@
 }
 
 .button {
-  background: var(--green);
-  color: #0c3d0c;
+  background: var(--primary);
+  color: var(--white);
   border: none;
   border-radius: 12px;
   padding: 10px 14px;
@@ -94,18 +98,19 @@
 }
 
 .buttonSecondary {
-  background: var(--light-blue);
-  color: #0b335c;
+  background: var(--border);
+  color: var(--dark);
 }
 
 .buttonDanger {
-  background: #f56565;
+  background: var(--danger);
   color: var(--white);
 }
 
 .button:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  background: var(--primary-hover);
 }
 
 .tableWrapper {
@@ -121,8 +126,8 @@
 }
 
 .table thead {
-  background: var(--light-blue);
-  color: #0b335c;
+  background: var(--dark);
+  color: var(--white);
 }
 
 .table th,
@@ -134,7 +139,7 @@
 }
 
 .table tbody tr:hover {
-  background: rgba(173, 216, 230, 0.18);
+  background: rgba(14, 135, 145, 0.08);
 }
 
 .form {
@@ -148,7 +153,7 @@
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: #f8fafc;
+  background: #e8eef2;
   font-size: 14px;
 }
 
@@ -161,7 +166,7 @@
   display: inline-flex;
   align-items: center;
   padding: 6px 10px;
-  background: rgba(136, 231, 136, 0.3);
+  background: rgba(46, 204, 113, 0.2);
   color: #0c3d0c;
   border-radius: 999px;
   font-weight: 700;
@@ -170,12 +175,12 @@
 }
 
 .statusPending {
-  background: rgba(255, 193, 7, 0.2);
-  color: #92400e;
+  background: rgba(241, 196, 15, 0.2);
+  color: #8a6b0a;
 }
 
 .statusApproved {
-  background: rgba(136, 231, 136, 0.3);
+  background: rgba(46, 204, 113, 0.2);
   color: #0c3d0c;
 }
 
@@ -200,18 +205,18 @@
 .loader {
   padding: 12px;
   border-radius: 10px;
-  background: rgba(173, 216, 230, 0.2);
+  background: rgba(14, 135, 145, 0.12);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #0b335c;
+  color: var(--dark);
   font-weight: 700;
 }
 
 .error {
   padding: 12px;
   border-radius: 10px;
-  background: rgba(245, 101, 101, 0.15);
+  background: rgba(192, 57, 43, 0.12);
   color: #7f1d1d;
   font-weight: 700;
 }
