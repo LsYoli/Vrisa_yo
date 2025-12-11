@@ -16,10 +16,12 @@ export const useUsers = () => {
     const [userRes, roleRes, permissionRes, rolePermRes] = await Promise.all([
       supabase
         .from('usuario')
-        .select('usuario_id, nombre_usuario, telefono, email, rol_id, institucion_id')
+        .select(
+          'usuario_id, nombre_usuario, telefono, email, rol_id, institucion_id, rol:rol_id (rol_id, nombre_rol, descripcion_rol)',
+        )
         .order('usuario_id', { ascending: true }),
-      supabase.from('rol').select('rol_id, nombre').order('rol_id', { ascending: true }),
-      supabase.from('permiso').select('permiso_id, nombre').order('permiso_id', { ascending: true }),
+      supabase.from('rol').select('rol_id, nombre_rol, descripcion_rol').order('rol_id', { ascending: true }),
+      supabase.from('permiso').select('*').order('permiso_id', { ascending: true }),
       supabase.from('permiso_por_rol').select('*'),
     ]);
 

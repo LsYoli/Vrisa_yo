@@ -68,7 +68,7 @@ export const UserManager = () => {
                         const roleId = getRoleId(role);
                         return (
                           <option key={roleId} value={roleId}>
-                            {role.nombre || roleId}
+                            {role.nombre_rol || roleId}
                           </option>
                         );
                       })}
@@ -109,7 +109,7 @@ export const UserManager = () => {
                   className={`${styles.button} ${active ? '' : styles.buttonSecondary}`}
                   onClick={() => togglePermissionForRole(selectedRole, permId, active)}
                 >
-                  {active ? '✅' : '➕'} {perm.nombre || permId}
+                  {active ? '✅' : '➕'} {perm.nombre_permiso || perm.nombre || permId}
                 </button>
               );
             })}
